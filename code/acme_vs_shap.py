@@ -19,12 +19,12 @@ def save_images(shap_val,acme,name):
 
     shap.summary_plot(shap_val, dataframe.drop(columns='target'),plot_size=(15,10), show=False)
     plt.savefig('../results/acme_vs_shap/shap_'+name+'.pdf', format='pdf')
-    shap.summary_plot(shap_xg_values, dataframe.drop(columns='target'), show=False, plot_size=(15,10), plot_type='bar')
+    shap.summary_plot(shap_val, dataframe.drop(columns='target'), show=False, plot_size=(15,10), plot_type='bar')
     plt.savefig('../results/acme_vs_shap/SHAP_bar_'+name+'.pdf', format='pdf')
 
-    fig = acme_xg.summary_plot()
+    fig = acme.summary_plot()
     fig.update_layout(height=650).write_image('../results/acme_vs_shap/ACME_'+name+'.pdf')
-    fig = acme_xg.bar_plot()
+    fig = acme.bar_plot()
     fig.update_layout(height=650).write_image('../results/acme_vs_shap/ACME_bar_'+name+'.pdf')
 
 os.mkdir('../results/acme_vs_shap')
@@ -41,7 +41,7 @@ features = dataframe.drop(columns={'target'}).columns
 
 
 # Train different model
-
+print('Model train...')
 models = {}
 models['linear_regression'] = LinearRegression().fit(X,y)
 models['random_forest_regressor'] = RandomForestRegressor().fit(X,y)
@@ -50,6 +50,8 @@ models['svr'] = SVR().fit(X,y)
 models['xgboost'] = xgb.XGBRegressor().fit(X,y)
 
 # MSE for models
+
+print('Model MSE...')
 from sklearn.metrics import mean_squared_error
 for model in models.keys():
     pred = models[model].predict(X)
@@ -57,7 +59,7 @@ for model in models.keys():
     print(model +' '+ 'MSE: ' + str(mse))
 
 # Compare ACME and SHAP results
-
+print('Starting explainability...')
 time_start = {}
 time_elapsed = {}
 
@@ -136,8 +138,8 @@ time_elapsed['SHAP_SVR'] = (time.time() - time_start)
 save_images(shap_svr,acme_svr,'XG')
 
 # RESULTS
-with open('../results/synt_data/acme_vs_shap_time_elapsed.txt', 'w') as time_elapsed_file:
-     time_elapsed_file.write(json.dumps(time_elapsed))
+with open('../results/acme_vs_shap/acme_vs_shap_time_elapsed.txt', 'w') as time_elapsed_file:
+    time_elapsed_file.write(json.dumps(time_elapsed))
 
 
 

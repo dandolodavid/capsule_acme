@@ -5,18 +5,21 @@ from ACME.ACME import ACME
 import time
 import shap
 import warnings
+import json
+import matplotlib.pyplot as plt
+
 warnings.filterwarnings("ignore")
 
 def save_images(shap_val,acme,name):
 
     shap.summary_plot(shap_val, glass_data.drop(columns='Type'),plot_size=(15,10), show=False)
     plt.savefig('../results/classification_nn/shap_'+name+'.pdf', format='pdf')
-    shap.summary_plot(shap_xg_values, glass_data.drop(columns='Type'), show=False, plot_size=(15,10), plot_type='bar')
+    shap.summary_plot(shap_val, glass_data.drop(columns='Type'), show=False, plot_size=(15,10), plot_type='bar')
     plt.savefig('../results/classification_nn/SHAP_bar_'+name+'.pdf', format='pdf')
 
-    fig = acme_xg.summary_plot()
+    fig = acme.summary_plot()
     fig.update_layout(height=650).write_image('../results/classification_nn/ACME_'+name+'.pdf')
-    fig = acme_xg.bar_plot()
+    fig = acme.bar_plot()
     fig.update_layout(height=650).write_image('../results/classification_nn/ACME_bar_'+name+'.pdf')
 
 
@@ -52,5 +55,5 @@ time_elapsed['SHAP'] = time.time() - time_start
 os.mkdir('../results/classification_nn')
 save_images(shap_nn_values, acme_nn, 'MLP')
 
-with open('../results/synt_data/classification_nn.txt', 'w') as time_elapsed_file:
-     time_elapsed_file.write(json.dumps(time_elapsed))
+with open('../results/classification_nn/classification_nn.txt', 'w') as time_elapsed_file:
+    time_elapsed_file.write(json.dumps(time_elapsed))

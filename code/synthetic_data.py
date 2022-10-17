@@ -50,7 +50,7 @@ time_elapsed['model_1'] = (time.time() - time_start)
 time_start = time.time()
 acme_mod1 = ACME(reg, 'target', K=50)
 acme_mod1 = acme_mod1.fit(df_1, robust=True)
-time_elapsed['model_1_ashap'] = (time.time() - time_start)
+time_elapsed['model_1_acme'] = (time.time() - time_start)
 
 # save plot
 shap.summary_plot(shap_values, df_1.drop(columns='target'),plot_size=(15,10), show=False)
@@ -97,7 +97,7 @@ time_elapsed['model_2'] = (time.time() - time_start)
 time_start = time.time()
 acme_mod2 = ACME(reg, 'target', K=50)
 acme_mod2 = acme_mod2.fit(df_2[features+['target']], robust = True)
-time_elapsed['model_2_ashap'] = (time.time() - time_start)
+time_elapsed['model_2_acme'] = (time.time() - time_start)
 
 # save plot
 shap.summary_plot(shap_values2, df_2[features],plot_size=(15,10), show=False)
@@ -142,7 +142,7 @@ time_elapsed['model_3'] = (time.time() - time_start)
 time_start = time.time()
 acme_mod3 = ACME(reg, 'target', K=50)
 acme_mod3 = acme_mod3.fit(df_3[features+['target']], robust=True)
-time_elapsed['model_3_ashap'] = (time.time() - time_start)
+time_elapsed['model_3_acme'] = (time.time() - time_start)
 
 # save plot
 shap.summary_plot(shap_values3, df_3[features],plot_size=(15,10), show=False)

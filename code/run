@@ -2,10 +2,10 @@
 set -ex
 
 # This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
+python -u shap_reducing_time.py
 python -u synthetic_data.py
 python -u classification.py
-python -u pyhton classification_nn.py
 python -u classification_nn.py
-pyhton mse_top_k.py
+pyhton -u mse_top_k.py
 python -u acme_vs_shap.py "$@"
 
