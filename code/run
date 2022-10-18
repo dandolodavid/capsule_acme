@@ -6,6 +6,6 @@ python -u shap_reducing_time.py
 python -u synthetic_data.py
 python -u classification.py
 python -u classification_nn.py
-pyhton -u mse_top_k.py
+python -u mse_top_k.py
 python -u acme_vs_shap.py "$@"
 

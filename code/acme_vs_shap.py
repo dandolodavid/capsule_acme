@@ -135,7 +135,7 @@ shap_svr = shap.KernelExplainer(models['svr'].predict,  X)
 shap_svr_values = shap_svr.shap_values(X)
 time_elapsed['SHAP_SVR'] = (time.time() - time_start)
 
-save_images(shap_svr,acme_svr,'XG')
+save_images(shap_svr_values,acme_svr,'XG')
 
 # RESULTS
 with open('../results/acme_vs_shap/acme_vs_shap_time_elapsed.txt', 'w') as time_elapsed_file:

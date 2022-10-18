@@ -18,7 +18,7 @@ This capsule is private and its environment cannot be downloaded at this time. Y
 
 In your terminal, navigate to the folder where you've extracted the capsule and execute the following command:
 ```shell
-cd environment && docker build . --tag ec7fecea-8a49-416c-ab68-085708315b57; cd ..
+cd environment && docker build . --tag ddaea3d4-a82d-4a11-98ba-290ff56892aa; cd ..
 ```
 
 > This step will recreate the environment (i.e., the Docker image) locally, fetching and installing any required dependencies in the process. If any external resources have become unavailable for any reason, the environment will fail to build.
@@ -32,5 +32,5 @@ docker run --rm --gpus all \
   --volume "$PWD/data":/data \
   --volume "$PWD/code":/code \
   --volume "$PWD/results":/results \
-  ec7fecea-8a49-416c-ab68-085708315b57 bash run
+  ddaea3d4-a82d-4a11-98ba-290ff56892aa bash run
 ```
